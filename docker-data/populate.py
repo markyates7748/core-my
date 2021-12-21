@@ -1,5 +1,6 @@
 from importlib.machinery import SourceFileLoader
 import requests
+import os
 
 # get defined methods
 populate_bank = SourceFileLoader('bank_producer' ,'aline_files/aline-bank-microservice-my/python-data-producer/bank_producer.py').load_module()
@@ -16,7 +17,6 @@ login_info = {
 login_response = requests.post('http://localhost:8070/login', json=login_info)
 bearer_token = login_response.headers['Authorization']
 auth = {'Authorization' : bearer_token}
-# requests.post('url', headers=headers)
 
 # execute methods to populate db
 print("Populating banks")

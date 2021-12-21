@@ -15,9 +15,17 @@ services:
       - ./docker-data/aline-db-schema.sql:/docker-entrypoint-initdb.d/aline-db-schema.sql
     ports:
       - 3307:3306
+    networks:
+      - aline_backend
 
   adminer:
     image: adminer
+    container_name: db-portal
     restart: always
     ports:
       - 8080:8080
+    networks:
+      - aline_backend
+
+networks:
+  aline_backend: {}

@@ -47,3 +47,8 @@ local.properties
 .loadpath
 .recommenders
 
+### Python ###
+__pycache__/
+*.pyc
+.pytest_cache/
+*_test.py
