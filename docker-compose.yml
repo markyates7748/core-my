@@ -5,7 +5,6 @@ services:
     image: mysql
     container_name: aline-db-dev
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: alinedb
@@ -16,16 +15,80 @@ services:
     ports:
       - 3307:3306
     networks:
-      - aline_backend
+      - aline_nw
 
-  adminer:
-    image: adminer
-    container_name: db-portal
-    restart: always
+  # adminer:
+  #   image: adminer
+  #   container_name: db-portal
+  #   ports:
+  #     - 8080:8080
+  #   networks:
+  #     - aline_nw
+
+  bank_ms:
+    image: bank-ms
+    container_name: bank_ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8083:8083
+    networks:
+      - aline_nw
+
+  transaction_ms:
+    image: transaction-ms
+    container_name: transaction_ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8073:8073
+    networks:
+      - aline_nw
+
+  underwriter_ms:
+    image: underwriter-ms
+    container_name: underwriter_ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8071:8071
+    networks:
+      - aline_nw
+
+  user_ms:
+    image: user-ms
+    container_name: user_ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8070:8070
+    networks:
+      - aline_nw
+
+  aline_gateway:
+    image: aline-gateway
+    container_name: aline_gateway
     ports:
       - 8080:8080
     networks:
-      - aline_backend
+      - aline_nw
+
+  landing_portal:
+    image: landing-portal
+    container_name: landing_portal
+    ports:
+      - 3007:3007
+    networks:
+      - aline_nw
+
+  member_dash:
+    image: member-dash
+    container_name: member_dash
+    ports:
+      - 4200:4200
+    networks:
+      - aline_nw
 
 networks:
-  aline_backend: {}
+  aline_nw:
+    name: aline
