@@ -68,6 +68,8 @@ services:
   aline_gateway:
     image: aline-gateway
     container_name: aline_gateway
+    env_file:
+      - dev_setup.env
     ports:
       - 8080:8080
     networks:
@@ -76,6 +78,8 @@ services:
   landing_portal:
     image: landing-portal
     container_name: landing_portal
+    env_file:
+      - dev_setup.env
     ports:
       - 3007:3007
     networks:
@@ -84,8 +88,20 @@ services:
   member_dash:
     image: member-dash
     container_name: member_dash
+    env_file:
+      - dev_setup.env
     ports:
       - 4200:4200
+    networks:
+      - aline_nw
+
+  admin_portal:
+    image: admin-portal
+    container_name: admin_portal
+    env_file:
+      - dev_setup.env
+    ports:
+      - 3000:3000
     networks:
       - aline_nw
 
