@@ -338,4 +338,4 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 INSERT IGNORE INTO merchant (code, name) VALUES ('1111', 'NONE');
 INSERT IGNORE INTO merchant (code, name) VALUES ('NONE', 'NONE');
-INSERT IGNORE INTO account_sequence next_val VALUE 1;
+INSERT IGNORE INTO account_sequence (next_val) VALUES ('1');

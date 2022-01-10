@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: aline-pod-my
+
+spec:
+  containers:
+    - name: db
+      image: mysql
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        - name: MYSQL_DATABASE
+          value: alinedb
+        - name: MYSQL_USER
+          value: user
+        - name: MYSQL_PASSWORD
+          value: pwd
+      # volumeMounts:
+      #   - name: aline-db-schema
+      #     mountPath: ./docker-data/aline-db-schema.sql:/docker-entrypoint-initdb.d/aline-db-schema.sql
+          
+    - name: db-portal
+      image: adminer
+      ports:
+        - containerPort: 8080
+        - hostPort: 8080
+
+    # - name: user-ms
+    #   image: myates7748/aline-my:user-ms
+    #   envFrom:
+    #     - configMapRef:
+    #         name: aline-config
+
+    # - name: underwriter-ms
+    #   image: myates7748/aline-my:underwriter-ms
+    #   envFrom:
+    #     - configMapRef:
+    #         name: aline-config
+
+    # - name: transaction-ms
+    #   image: myates7748/aline-my:transaction-ms
+    #   envFrom:
+    #     - configMapRef:
+    #         name: aline-config
+
+    # - name: bank-ms
+    #   image: myates7748/aline-my:bank-ms
+    #   envFrom:
+    #     - configMapRef:
+    #         name: aline-config
+
+  volumes:
+    # - name: aline-db-schema
+    - name: aline-config
+      configMap:
+        name: aline-config
