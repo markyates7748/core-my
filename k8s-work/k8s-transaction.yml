@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transaction-deploy
+  labels:
+    app: transaction-ms
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transaction-ms
+  template:
+    metadata:
+      labels:
+        app: transaction-ms
+    spec:
+      containers:
+        - name: bank-ms
+          image: myates7748/aline-my:transaction-ms
+          ports:
+            - containerPort: 8073
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: aline-config
+                  key: DB_HOST
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: aline-config
+                  key: DB_NAME
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: aline-secret
+                  key: MYSQL_PASSWORD
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: aline-config
+                  key: DB_PORT
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: secret-config
+                  key: MYSQL_USER
+            - name: ENCRYPT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aline-secret
+                  key: ENCRYPT_SECRET_KEY
+            - name: JWT_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: aline-secret
+                  key: JWT_SECRET_KEY
+  
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: transaction-service
+spec:
+  type: Nodeport
+  selector:
+    app: transaction-ms
+  ports:
+    - protocol: TCP
+      port: 8073
+      targetPort: 8073
+      nodePort: 30873
