@@ -44,7 +44,7 @@ spec:
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: secret-config
+                  name: aline-secret
                   key: MYSQL_USER
             - name: ENCRYPT_SECRET_KEY
               valueFrom:
