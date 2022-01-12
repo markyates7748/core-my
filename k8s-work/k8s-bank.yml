@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: bank-ms
-          image: myates7748/aline-my:bank-ms
+          image: myates7748/bank-ms:v1.0
           ports:
             - containerPort: 8083
           env:
@@ -64,7 +64,7 @@ kind: Service
 metadata:
   name: bank-service
 spec:
-  type: Nodeport
+  type: NodePort
   selector:
     app: bank-ms
   ports:

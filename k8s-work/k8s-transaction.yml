@@ -16,8 +16,8 @@ spec:
         app: transaction-ms
     spec:
       containers:
-        - name: bank-ms
-          image: myates7748/aline-my:transaction-ms
+        - name: transaction-ms
+          image: myates7748/transaction-ms:v1.0
           ports:
             - containerPort: 8073
           env:
@@ -64,7 +64,7 @@ kind: Service
 metadata:
   name: transaction-service
 spec:
-  type: Nodeport
+  type: NodePort
   selector:
     app: transaction-ms
   ports:

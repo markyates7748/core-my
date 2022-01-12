@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: db
-          image: mysql
+          image: myates7748/aline-db:v1.0
           ports:
             - containerPort: 3306
           env:

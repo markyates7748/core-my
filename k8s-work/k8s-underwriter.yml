@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: underwriter-ms
-          image: myates7748/aline-my:underwriter-ms
+          image: myates7748/underwriter-ms:v1.0
           ports:
             - containerPort: 8071
           env:
@@ -64,7 +64,7 @@ kind: Service
 metadata:
   name: underwriter-service
 spec:
-  type: Nodeport
+  type: NodePort
   selector:
     app: underwriter-ms
   ports:
