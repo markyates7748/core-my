@@ -2,7 +2,7 @@ version: '3'
 
 services:
   aline_db:
-    image: aline-db
+    image: myates7748/aline-db:v1.0
     container_name: aline-db
     # volumes:
       # - ./docker-data/aline-db-schema.sql:/docker-entrypoint-initdb.d/aline-db-schema.sql
@@ -12,7 +12,7 @@ services:
       - aline_nw
 
   bank_ms:
-    image: bank-ms
+    image: myates7748/bank-ms:v1.0
     container_name: bank-ms
     depends_on:
       - aline_db
@@ -24,7 +24,7 @@ services:
       - aline_nw
 
   transaction_ms:
-    image: transaction-ms
+    image: myates7748/transaction-ms:v1.0
     container_name: transaction-ms
     depends_on:
       - aline_db
@@ -36,7 +36,7 @@ services:
       - aline_nw
 
   underwriter_ms:
-    image: underwriter-ms
+    image: myates7748/underwriter-ms:v1.0
     container_name: underwriter-ms
     depends_on:
       - aline_db
@@ -48,7 +48,7 @@ services:
       - aline_nw
 
   user_ms:
-    image: user-ms
+    image: myates7748/user-ms:v1.0
     container_name: user-ms
     depends_on:
       - aline_db
@@ -60,7 +60,7 @@ services:
       - aline_nw
 
   aline_gateway:
-    image: aline-gateway
+    image: myates7748/aline-gateway:v1.0
     container_name: aline-gateway
     env_file:
       - dev_setup.env
@@ -70,7 +70,7 @@ services:
       - aline_nw
 
   landing_portal:
-    image: landing-portal
+    image: myates7748/landing-portal:v1.0
     container_name: landing-portal
     depends_on:
       - aline_gateway
@@ -82,7 +82,7 @@ services:
       - aline_nw
 
   member_dash:
-    image: member-dash
+    image: myates7748/member-dash:v1.0
     container_name: member-dash
     depends_on:
       - aline_gateway
@@ -94,7 +94,7 @@ services:
       - aline_nw
 
   admin_portal:
-    image: admin-portal
+    image: myates7748/admin-portal:v1.0
     container_name: admin-portal
     depends_on:
       - aline_gateway

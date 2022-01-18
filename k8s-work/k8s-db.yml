@@ -10,6 +10,8 @@ spec:
   selector:
     matchLabels:
       app: db
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -18,8 +20,18 @@ spec:
       containers:
         - name: db
           image: myates7748/aline-db:v1.0
+          # resources:
+          #   limits:
+          #       memory: 256Mi
+          #       cpu: 500m
+          #   requests:
+          #       memory: 126Mi
+          #       cpu: 250m
           ports:
             - containerPort: 3306
+          volumeMounts:
+            - name: db-storage
+              mountPath: /var/lib/mysql
           env:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
@@ -40,7 +52,11 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: aline-secret
-                  key: MYSQL_PASSWORD
+                  key: MYSQL_PASSWORD 
+      volumes:
+        - name: db-storage
+          persistentVolumeClaim:
+            claimName: db-persist-claim
   
 ---
 
