@@ -18,13 +18,6 @@ spec:
       containers:
         - name: user-ms
           image: myates7748/user-ms:v1.0
-          # resources:
-          #   limits:
-          #       memory: 256Mi
-          #       cpu: 500m
-          #   requests:
-          #       memory: 126Mi
-          #       cpu: 250m
           ports:
             - containerPort: 8070
           env:

@@ -18,13 +18,6 @@ spec:
       containers:
         - name: transaction-ms
           image: myates7748/transaction-ms:v1.0
-          # resources:
-          #   limits:
-          #       memory: 256Mi
-          #       cpu: 500m
-          #   requests:
-          #       memory: 126Mi
-          #       cpu: 250m
           ports:
             - containerPort: 8073
           env:
