@@ -6,7 +6,7 @@ metadata:
     app: transaction-ms
 
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: transaction-ms
@@ -18,6 +18,10 @@ spec:
       containers:
         - name: transaction-ms
           image: myates7748/transaction-ms:v1.0
+          resources:
+            limits:
+                memory: 512Mi
+                cpu: 500m
           ports:
             - containerPort: 8073
           env:
