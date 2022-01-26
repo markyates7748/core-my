@@ -3,7 +3,7 @@ version: '3'
 services:
 
   bank-ms:
-    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-bank-microservice:initial
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-bank-microservice:v1.0
     container_name: bank-ms
     env_file:
       - dev_setup.env
@@ -13,7 +13,7 @@ services:
       - aline_nw
 
   transaction-ms:
-    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-transaction-microservice:initial
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-transaction-microservice:v1.0
     container_name: transaction-ms
     env_file:
       - dev_setup.env
@@ -23,7 +23,7 @@ services:
       - aline_nw
 
   underwriter-ms:
-    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-underwriter-microservice:latest
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-underwriter-microservice:v1.0
     container_name: underwriter-ms
     env_file:
       - dev_setup.env
@@ -33,7 +33,7 @@ services:
       - aline_nw
 
   user-ms:
-    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-user-microservice:initial
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-user-microservice:v1.0
     container_name: user-ms
     env_file:
       - dev_setup.env
