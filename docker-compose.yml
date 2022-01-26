@@ -9,7 +9,7 @@ services:
     networks:
       - aline_nw
 
-  bank_ms:
+  bank-ms:
     image: myates7748/bank-ms:v1.1
     container_name: bank-ms
     depends_on:
@@ -22,7 +22,7 @@ services:
     networks:
       - aline_nw
 
-  transaction_ms:
+  transaction-ms:
     image: myates7748/transaction-ms:v1.1
     container_name: transaction-ms
     depends_on:
@@ -35,7 +35,7 @@ services:
     networks:
       - aline_nw
 
-  underwriter_ms:
+  underwriter-ms:
     image: myates7748/underwriter-ms:v1.1
     container_name: underwriter-ms
     depends_on:
@@ -48,7 +48,7 @@ services:
     networks:
       - aline_nw
 
-  user_ms:
+  user-ms:
     image: myates7748/user-ms:v1.1
     container_name: user-ms
     depends_on:
@@ -61,8 +61,8 @@ services:
     networks:
       - aline_nw
 
-  aline_gateway:
-    image: myates7748/aline-gateway:v1.1
+  aline-gateway:
+    image: myates7748/aline-gateway:v1.2
     container_name: aline-gateway
     env_file:
       - dev_setup.env
@@ -71,11 +71,11 @@ services:
     networks:
       - aline_nw
 
-  landing_portal:
+  landing-portal:
     image: myates7748/landing-portal:v1.0
     container_name: landing-portal
     depends_on:
-      - aline_gateway
+      - aline-gateway
     env_file:
       - dev_setup.env
     ports:
@@ -83,11 +83,11 @@ services:
     networks:
       - aline_nw
 
-  member_dash:
+  member-dash:
     image: myates7748/member-dash:v1.0
     container_name: member-dash
     depends_on:
-      - aline_gateway
+      - aline-gateway
     env_file:
       - dev_setup.env
     ports:
@@ -95,11 +95,11 @@ services:
     networks:
       - aline_nw
 
-  admin_portal:
+  admin-portal:
     image: myates7748/admin-portal:v1.0
     container_name: admin-portal
     depends_on:
-      - aline_gateway
+      - aline-gateway
     env_file:
       - dev_setup.env
     ports:

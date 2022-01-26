@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+
+  bank-ms:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-bank-microservice:initial
+    container_name: bank-ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8083:8083
+    networks:
+      - aline_nw
+
+  transaction-ms:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-transaction-microservice:initial
+    container_name: transaction-ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8073:8073
+    networks:
+      - aline_nw
+
+  underwriter-ms:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-underwriter-microservice:latest
+    container_name: underwriter-ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8071:8071
+    networks:
+      - aline_nw
+
+  user-ms:
+    image: 862167864120.dkr.ecr.us-east-1.amazonaws.com/my-user-microservice:initial
+    container_name: user-ms
+    env_file:
+      - dev_setup.env
+    ports:
+      - 8070:8070
+    networks:
+      - aline_nw
+
+networks:
+  aline_nw:
+    name: aline
