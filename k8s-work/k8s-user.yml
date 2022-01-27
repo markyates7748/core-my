@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: user-ms
-          image: myates7748/user-ms:v1.0
+          image: myates7748/user-ms:v1.1
           resources:
             limits:
                 memory: 512Mi

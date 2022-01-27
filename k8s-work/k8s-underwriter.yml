@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: underwriter-ms
-          image: myates7748/underwriter-ms:v1.0
+          image: myates7748/underwriter-ms:v1.1
           resources:
             limits:
                 memory: 512Mi
