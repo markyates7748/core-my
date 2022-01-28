@@ -61,52 +61,6 @@ services:
     networks:
       - aline_nw
 
-  aline-gateway:
-    image: myates7748/aline-gateway:v1.2
-    container_name: aline-gateway
-    env_file:
-      - dev_setup.env
-    ports:
-      - 8080:8080
-    networks:
-      - aline_nw
-
-  landing-portal:
-    image: myates7748/landing-portal:v1.0
-    container_name: landing-portal
-    depends_on:
-      - aline-gateway
-    env_file:
-      - dev_setup.env
-    ports:
-      - 3007:3007
-    networks:
-      - aline_nw
-
-  member-dash:
-    image: myates7748/member-dash:v1.0
-    container_name: member-dash
-    depends_on:
-      - aline-gateway
-    env_file:
-      - dev_setup.env
-    ports:
-      - 4200:4200
-    networks:
-      - aline_nw
-
-  admin-portal:
-    image: myates7748/admin-portal:v1.0
-    container_name: admin-portal
-    depends_on:
-      - aline-gateway
-    env_file:
-      - dev_setup.env
-    ports:
-      - 3000:3000
-    networks:
-      - aline_nw
-
 networks:
   aline_nw:
     name: aline
