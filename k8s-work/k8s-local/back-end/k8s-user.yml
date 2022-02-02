@@ -1,64 +1,64 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: transaction-deploy
+  name: user-deploy
   labels:
-    app: transaction-ms
+    app: user-ms
 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: transaction-ms
+      app: user-ms
   template:
     metadata:
       labels:
-        app: transaction-ms
+        app: user-ms
     spec:
       containers:
-        - name: transaction-ms
-          image: myates7748/transaction-ms:v1.1
+        - name: user-ms
+          image: myates7748/user-ms:v1.1
           resources:
             limits:
                 memory: 512Mi
                 cpu: 500m
           ports:
-            - containerPort: 8073
+            - containerPort: 8070
           env:
             - name: DB_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: aline-config
+                  name: aline-config-ms
                   key: DB_HOST
             - name: DB_NAME
               valueFrom:
                 configMapKeyRef:
-                  name: aline-config
+                  name: aline-config-ms
                   key: DB_NAME
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: aline-secret
-                  key: MYSQL_PASSWORD
+                  name: aline-secret-ms
+                  key: DB_PASSWORD
             - name: DB_PORT
               valueFrom:
                 configMapKeyRef:
-                  name: aline-config
+                  name: aline-config-ms
                   key: DB_PORT
             - name: DB_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: aline-secret
-                  key: MYSQL_USER
+                  name: aline-secret-ms
+                  key: DB_USERNAME
             - name: ENCRYPT_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: aline-secret
+                  name: aline-secret-ms
                   key: ENCRYPT_SECRET_KEY
             - name: JWT_SECRET_KEY
               valueFrom:
                 secretKeyRef:
-                  name: aline-secret
+                  name: aline-secret-ms
                   key: JWT_SECRET_KEY
   
 ---
@@ -66,13 +66,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: transaction-service
+  name: user-service
 spec:
   type: NodePort
   selector:
-    app: transaction-ms
+    app: user-ms
   ports:
     - protocol: TCP
-      port: 8073
-      targetPort: 8073
-      nodePort: 30873
+      port: 8070
+      targetPort: 8070
+      nodePort: 30870

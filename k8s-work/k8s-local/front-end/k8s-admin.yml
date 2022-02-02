@@ -18,26 +18,12 @@ spec:
       containers:
         - name: admin-portal
           image: myates7748/admin-portal:v1.0
-          # resources:
-          #   limits:
-          #       memory: 256Mi
-          #       cpu: 500m
-          #   requests:
-          #       memory: 126Mi
-          #       cpu: 250m
+          resources:
+            limits:
+                memory: 512Mi
+                cpu: 500m
           ports:
             - containerPort: 3000
-          env:
-            - name: ENCRYPT_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: aline-secret
-                  key: ENCRYPT_SECRET_KEY
-            - name: JWT_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: aline-secret
-                  key: JWT_SECRET_KEY
   
 ---
 
