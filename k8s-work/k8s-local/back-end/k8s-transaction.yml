@@ -24,42 +24,11 @@ spec:
                 cpu: 500m
           ports:
             - containerPort: 8073
-          env:
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: aline-config-ms
-                  key: DB_HOST
-            - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: aline-config-ms
-                  key: DB_NAME
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: aline-secret-ms
-                  key: DB_PASSWORD
-            - name: DB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: aline-config-ms
-                  key: DB_PORT
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: aline-secret-ms
-                  key: DB_USERNAME
-            - name: ENCRYPT_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: aline-secret-ms
-                  key: ENCRYPT_SECRET_KEY
-            - name: JWT_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: aline-secret-ms
-                  key: JWT_SECRET_KEY
+          envFrom:
+            - configMapRef:
+                name: aline-config-ms
+            - secretRef:
+                name: aline-secret-ms
   
 ---
 

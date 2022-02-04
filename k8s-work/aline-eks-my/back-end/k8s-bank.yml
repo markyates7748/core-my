@@ -21,58 +21,13 @@ spec:
       containers:
         - name: bank-ms-my
           image: ${AWS_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/my-bank-microservice:v1.0
-          resources:
-            limits:
-                memory: 512Mi
-                cpu: 500m
           ports:
             - containerPort: 8083
-          env:
-            - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: eks-configmap
-                  key: DB_NAME
-            - name: DB_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: eks-configmap
-                  key: DB_PORT
-            - name: AWS_REGION
-              valueFrom:
-                configMapKeyRef:
-                  name: eks-configmap
-                  key: AWS_REGION
-            - name: AWS_ID
-              valueFrom:
-                secretKeyRef:
-                  name: eks-secret
-                  key: AWS_ID
-            - name: DB_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: eks-secret
-                  key: DB_HOST
-            - name: DB_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: eks-secret
-                  key: DB_USERNAME
-            - name: DB_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: eks-secret
-                  key: DB_PASSWORD
-            - name: ENCRYPT_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: eks-secret
-                  key: ENCRYPT_SECRET_KEY
-            - name: JWT_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: eks-secret
-                  key: JWT_SECRET_KEY
+          envFrom:
+            - configMapRef:
+                name: eks-configmap
+            - secretRef:
+                name: eks-secret
   
 ---
 
